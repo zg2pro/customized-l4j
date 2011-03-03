@@ -1,0 +1,49 @@
+<!--
+
+  License4J Samples ANT build script.
+
+-->
+<project name="License4J Samples" default="jar" basedir=".">
+    <target name="init">
+        <tstamp>
+            <format property="build.time" pattern="dd/MM/yyyy"/>
+        </tstamp>
+        <property name="License4J.Samples.src" value="src"/>
+        <property name="License4J.Samples.lib" value="lib"/>
+        <property name="License4J.Samples.build" value="build"/>
+        <property name="License4J.Samples.build.classes" value="build/classes"/>
+        <property name="License4J.jar" value="../lib/license4j-1.5.1.jar"/>
+        <property name="License4J.Samples.jar" value="lib/demo.jar"/>
+        <path id="class.path">
+            <pathelement location="${License4J.jar}"/>
+            <fileset dir="${License4J.Samples.lib}">
+                <include name="*.jar"/>
+            </fileset>
+        </path>
+    </target>
+
+    <target name="prepare" depends="init">
+        <mkdir dir="${License4J.Samples.build}"/>
+        <mkdir dir="${License4J.Samples.build.classes}"/>
+    </target>
+
+    <target name="compile" depends="prepare">
+        <depend srcdir="${License4J.Samples.src}" destdir="${License4J.Samples.build.classes}" closure="yes"/>
+        <javac srcdir="${License4J.Samples.src}" destdir="${License4J.Samples.build.classes}" debug="on">
+            <classpath refid="class.path"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <copy todir="${License4J.Samples.build.classes}/com/smardec/license4j/demo/img">
+            <fileset dir="${License4J.Samples.src}/com/smardec/license4j/demo/img"/>
+        </copy>
+        <jar jarfile="${License4J.Samples.jar}">
+            <fileset dir="${License4J.Samples.build.classes}"/>
+        </jar>
+    </target>
+
+    <target name="clean" depends="init">
+        <delete dir="${License4J.Samples.build}"/>
+    </target>
+</project>
