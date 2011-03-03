@@ -1,0 +1,4 @@
+Customer=VNPT
+Company=IONetwork
+Expire=31-07-2010
+SignCode=07
