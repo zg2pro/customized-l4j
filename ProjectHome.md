@@ -1,0 +1,1 @@
+In case I need to distribute a licensed software one day, I'll have my l4j ready.
